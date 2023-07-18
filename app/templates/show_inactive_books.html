@@ -1,0 +1,50 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<h2> All Inactive Books</h2>
+          <table class="table table-striped " style="background-color: rgba(243, 215, 133, 0.496);">
+            <thead>
+              <tr>
+                <th scope="col">ID</th>
+                <th scope="col">Book Name</th>
+                <th scope="col">Price</th>
+                <th scope="col">Qty</th>
+                <th scope="col">Is_published</th>
+                <!-- <th scope="col">Is_active</th> -->
+                <th scope="col">Actions</th>
+              </tr>
+            </thead>
+
+            <tbody>
+                {% for book in allbooks %}
+                 <tr>
+                <th scope="row">{{book.id}}</th>
+                <td>{{book.name}}</td>
+                <td>{{book.price}}</td>
+                <td>{{book.qty}}</td>
+                <td>{{book.is_published}}</td>
+                <!-- <td>{{book.is_active}}</td> -->
+               
+                  <td>
+                    <!-- <a href="{% url 'show_single_books' book.id %}" class="btn btn-primary">View</a>
+                    <a href="{% url 'edit_book' book.id %}" class="btn btn-warning">Edit</a> -->
+
+                    <form action="{% url 'delete_single_book' book.id %}" method = "post">
+                      {% csrf_token %}
+                      <input type='submit' value="Hard Delete" class="btn btn-danger" >
+                    </form>
+
+                    <form action="{% url 'restore_book' book.id %}" method = "post">                      
+                        {% csrf_token %}
+                      <input type="submit" value="Restore" class="btn btn-primary" >
+                    </form>
+                  </td>
+
+              </tr>
+                {% endfor%}
+             
+            
+            </tbody>
+          </table>
+{% endblock  %}

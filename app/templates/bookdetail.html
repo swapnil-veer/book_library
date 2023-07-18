@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+
+
+{% block content %}
+          <h3> Single Book Information</h3>
+                 
+        <dl class="row">
+            <dt class="col-sm-3">Book ID :-</dt>
+            <dd class="col-sm-9">{{book.id}}</dd>
+          
+            <dt class="col-sm-3">Book Name :- </dt>
+            <dd class="col-sm-9">{{book.name}}</dd>
+
+            <dt class="col-sm-3">Book Price :-</dt>
+            <dd class="col-sm-9">{{book.price}}</dd>
+
+            <dt class="col-sm-3">Book Qty :- </dt>
+            <dd class="col-sm-9">{{book.qty}}</dd>
+
+            <dt class="col-sm-3">Book Is published :-</dt>
+            <dd class="col-sm-9">{{book.is_published}}</dd>
+          
+            <dt class="col-sm-3">Book Is active :-</dt>
+            <dd class="col-sm-9">{{book.is_active}}</dd>
+            
+          </dl>
+
+{% endblock %}
