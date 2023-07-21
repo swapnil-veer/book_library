@@ -98,6 +98,9 @@ def view_page(request):
         return redirect("show_books")
     elif request.method == "GET":
         return render(request, 'form_test.html', {'form' : Book_form()})
-    
+        
+ def test():
+     print("test")
+
 
     
