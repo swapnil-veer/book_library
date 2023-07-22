@@ -32,12 +32,11 @@ def user_login(request):
             user = authenticate(username= user_name, password= password)
             if user:
                 login(request,user)
-                # logout(request)
                 messages.success(request, "Logged in successfully...!")
                 return redirect("home_page")
-            else:
-                messages.error(request,"Invalid credentials.!")
-                return redirect("home_page")
+        else:
+            messages.error(request,"Invalid credentials.!")
+            return redirect("home_page")
     elif request.method == "GET":
         return render(request,"login.html",{'login_form':AuthenticationForm()})
     

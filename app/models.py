@@ -11,6 +11,7 @@ class Book(models.Model):
     qty = models.IntegerField()
     is_published = models.BooleanField(default= True)
     created_by = models.ForeignKey(User, on_delete= models.CASCADE, null= True)
+    creation_date = models.DateField(auto_now=True, null= True)
     is_active = models.BooleanField(default=True)
 
     class Meta:

@@ -1,6 +1,7 @@
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import HttpResponse, redirect, render
+from django.contrib.auth.models import User
 
 from app.forms import AddressForm, Book_form, LoginPage
 from app.models import Book
@@ -62,8 +63,15 @@ def edit_book(request, bid):
 @login_required
 def delete_single_book(request,bid):
     book_obj = Book.objects.get(id = bid)
-    book_obj.delete()
+    user = request.user
+    user_obj = User.objects.get(username = user)
+    if user_obj.is_superuser:
+        book_obj.delete()
+        messages.success(request,f"Book : {book_obj.name} has been deleted permenantly...!")
+    else:
+        messages.error(request,f"Only Superuser can permenantly delete books...!")
     return redirect('show_inactive_books')
+      
 
 @login_required
 def soft_delete_book(request,bid):
@@ -98,9 +106,7 @@ def view_page(request):
         return redirect("show_books")
     elif request.method == "GET":
         return render(request, 'form_test.html', {'form' : Book_form()})
-        
- def test():
-     print("test")
+
 
 
     
